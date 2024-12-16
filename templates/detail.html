@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ product['title'] }} - Detail{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <div class="product-header">
+        <h1 class="product-title">{{ product['title'] }}</h1>
+        <div class="product-location">{{ product['city'] }} Ad No:{{ product['ad_no'] }}</div>
+    </div>
+
+    <div class="product-content">
+        <div class="product-image-container">
+            <img src="{{ product['image_url'] }}" alt="{{ product['title'] }}" class="product-image">
+        </div>
+
+        <div class="product-info-container">
+            <div class="price-info">
+                <span class="price">{{ "{:,.0f}".format(product['price']) }} TL</span>
+            </div>
+
+            <table class="info-table">
+                <tbody>
+                    <tr>
+                        <td class="info-label">Ad No</td>
+                        <td class="info-value">{{ product['ad_no'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Category</td>
+                        <td class="info-value">{{ product['category_name'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Location</td>
+                        <td class="info-value">{{ product['city'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Date Posted</td>
+                        <td class="info-value">{{ product['created_at'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Description</td>
+                        <td class="info-value">{{ product['description'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

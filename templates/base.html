@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sahibinden_Clone.com{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="{{ url_for('home') }}" class="logo">sahibinden</a>
+            <form action="{{ url_for('search') }}" method="GET" class="search-box">
+                <input type="text" name="q" placeholder="Search products, listings, or stores">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+            <div class="header-actions">
+                <a href="{{ url_for('my_profile') }}" class="btn-text">My Profile</a>
+                <a href="{{ url_for('post_ad') }}" class="btn-primary">Post Free Add</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="categories">
+                <h2 class="categories-title">Categories</h2>
+                <ul class="category-list">
+                    {% for category in categories %}
+                    <li>
+                        <a href="{{ url_for('category', category_id=category['id']) }}" class="category-item">
+                            <span class="category-name">{{ category['name'] }}</span>
+                            <span class="category-count">{{ category['count'] }}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

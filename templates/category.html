@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ category['name'] }} - sahibinden{% endblock %}
+{% block content %}
+
+<div class="category-content">
+    <h1 class="category-title">{{ category['name'] }}</h1>
+    
+    <div class="listing-grid">
+        {% for product in products %}
+        <article class="listing-card">
+            <a href="{{ url_for('product_detail', product_id=product['id']) }}">
+                <div class="listing-image">
+                    <img src="{{ product['image_url'] }}" alt="{{ product['title'] }}">
+                </div>
+                <div class="listing-content">
+                    <h3 class="listing-title">{{ product['title'] }}</h3>
+                    <p class="listing-price">{{ "{:,.0f}".format(product['price']) }} TL</p>
+                    <p class="listing-location">{{ product['city'] }}</p>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

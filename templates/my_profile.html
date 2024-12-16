@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1 class="profile-title">My Profile</h1>
+    <div class="profile-content">
+        <div class="profile-section">
+            <h2>Personal Information</h2>
+            <div class="profile-info-container">
+                <div class="profile-image-static">
+                    <img src="{{ user.profile_image or '/static/images/selin.png' }}" 
+                         alt="Profile Picture" class="profile-image-preview">
+                </div>
+                <div class="profile-details">
+                    <p><strong>Name:</strong> Selin Günes</p>
+                    <p><strong>Email:</strong> selingunes@gmail.com</p>
+                    <p><strong>Location:</strong> Istanbul</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-section">
+            <h2>My Adds</h2>
+            <div class="profile-listings">
+                {% if listings %}
+                    <div class="listing-grid">
+                        {% for listing in listings %}
+                            <article class="listing-card">
+                                <div class="listing-image">
+                                    <img src="{{ listing.image_url }}" alt="{{ listing.title }}">
+                                </div>
+                                <div class="listing-content">
+                                    <h3>{{ listing.title }}</h3>
+                                    <p>{{ "{:,.0f}".format(listing.price) }} TL</p>
+                                    <p>{{ listing.city }}</p>
+                                    <!-- Delete button -->
+                                    <form action="{{ url_for('delete_listing', listing_id=listing.id) }}" method="POST">
+                                        <button type="submit" class="btn-delete">Delete</button>
+                                    </form>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>You haven't posted anything yet.</p>
+                {% endif %}
+                <a href="{{ url_for('post_ad') }}" class="btn-primary">Create New Listing</a>
+            </div>
+        </div>
+        
+</div>
+{% endblock %}

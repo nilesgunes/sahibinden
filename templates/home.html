@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sahibinden -Home{% endblock %}
+{% block content %}
+<section class="featured-listings">
+    <h2 class="section-title">Featured Adds</h2>
+    <div class="listing-grid">
+        {% for product in products %}
+        <article class="listing-card">
+
+            <a href="{{ url_for('product_detail', product_id=product['id']) }}" class="listing-link">
+                <div class="listing-image">
+                    <img src="{{ product['image_url'] }}" alt="{{ product['title'] }}">
+                </div>
+                <div class="listing-content">
+                    <h3 class="listing-title">{{ product['title'] }}</h3>
+                    <p class="listing-price">{{ "{:,.2f}".format(product['price']) }} TL</p>
+                    <p class="listing-location">{{ product['city'] }}</p>
+                    <p class="listing-category">{{ product['category_name'] }}</p>
+                </div>
+            </a>
+            
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Post New Ad{% endblock %}
+{% block content %}
+<div class="post-ad-container">
+    <h1 class="post-ad-title">Post A New Ad</h1>
+    <form method="POST" enctype="multipart/form-data" class="post-ad-form">
+        <div class="form-row">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-row">
+            <label for="category">Category</label>
+            <select id="category" name="category_id" required>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="description">Description of the Add</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="price">Price (TL)</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+        </div>
+
+        <div class="form-row">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+
+        <div class="form-row">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Post Ad</button>
+    </form>
+</div>
+{% endblock %}
